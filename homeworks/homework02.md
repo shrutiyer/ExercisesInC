@@ -32,16 +32,25 @@ action.
 
 3) What is the primary purpose of the process abstraction?
 
-Ans.
+Ans. By abstracting a process, the program (and the programmers) doesn't need to
+figure out the details of the device hardware, virtual memory or sharing run-time
+with other programs. The process abstraction simplifies the knowledge required for
+a program to run.
 
 4) What illusion does the process abstraction create?
 
-Ans.
+Ans. When a program runs, the process abstraction makes it seem like the program
+has all the memory on a machine available and no interruptions while the program
+is running. In reality, memory is allocated according to the program needs while
+it is running and the OS will interrupt the process, save its state for restarting
+it later.
 
 5) What is the kernel?
 
-Ans. The kernel is the core of the operating system that performs many important functionalities crucial to a proper functioning operating system.
+Ans. The kernel is the core of the operating system that performs many important 
+functionalities crucial to a proper functioning operating system.
 
 6) What is a daemon?
 
-Ans. A daemon is a process that runs in the background, without any direct control from the user.
+Ans. A daemon is a process that runs in the background, without any direct control 
+from the user.
