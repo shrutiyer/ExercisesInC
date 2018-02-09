@@ -64,7 +64,7 @@ int read_integer(int *number) {
 
     // check for invalid input.  Notice that atoi returns 0
     // for invalid input, so we can't allow the used to enter 0.
-    if (*number == 0) {
+    if (number == 0) {
         return 2;
     }
     return 0;

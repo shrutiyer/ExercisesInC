@@ -1,5 +1,8 @@
 /* Example code for Exercises in C.
 
+When a user provides a regex string, the program searches
+through the tracks and prints the matched track names.
+
 Modified version of an example from Chapter 2.5 of Head First C.
 
 */
@@ -7,6 +10,7 @@ Modified version of an example from Chapter 2.5 of Head First C.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <regex.h>
 
 #define NUM_TRACKS 5
 
@@ -37,7 +41,30 @@ void find_track(char search_for[])
 // Prints track number and title.
 void find_track_regex(char pattern[])
 {
-    // TODO: fill this in
+    regex_t regex;
+    int return_int;
+    int i;
+    int is_match_found = 0;
+
+    return_int = regcomp(&regex, pattern, 0);
+    if (return_int) {
+        puts("Regex could not be compiled");
+        exit(1);
+    }
+
+    for (i=0; i<NUM_TRACKS; i++) {
+        return_int = regexec(&regex, tracks[i], 0, NULL, 0);
+        if (return_int==REG_NOMATCH) {
+            continue;
+        }
+        printf("Match found in Track %i: '%s'\n", i, tracks[i]);
+        is_match_found = 1;
+    }
+
+    if (!is_match_found) {
+        puts("No match found for the regex provided");
+    }
+    regfree(&regex);
 }
 
 // Truncates the string at the first newline, if there is one.
@@ -58,8 +85,8 @@ int main (int argc, char *argv[])
     fgets(search_for, 80, stdin);
     rstrip(search_for);
 
-    find_track(search_for);
-    //find_track_regex(search_for);
+    //find_track(search_for);
+    find_track_regex(search_for);
 
     return 0;
 }
