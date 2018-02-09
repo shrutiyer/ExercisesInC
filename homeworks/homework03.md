@@ -29,7 +29,7 @@ Ignoring the details of the encoding scheme, how many different characters can b
 
     Ans. GiB is the size of the main "memory" in binary units and GB is the size of the "storage" in decimal units.
     GiB is 2^30 bytes (or 1,073,741,824 bytes) and GB is 10^9 bytes (or 1,000,000,000 bytes). The percent difference 
-    between their sizes is 6.867%
+    between their sizes is 6.867% (when compared to 2^30 bytes) and 7.37% (when compared to 10^9 bytes).
     
     *Source:https://en.wikipedia.org/wiki/File_size*
 
