@@ -40,11 +40,21 @@ file you wrote is not there.  What happened?
 
 5) Can you think of one advantage of a File Allocation Table over a UNIX inode?  Or an advantage of a inode over a FAT?
 
-    Ans. 
+    Ans. File Allocation Table has all the file information it needs inside one table whereas UNIX inode 
+    has information distributed into many different indirection blocks. UNIX inode might be faster since 
+    contents of the files are located next to each other but the same cannot be promised of FAT system.
 
 6) What is overhead?  What is fragmentation?
 
+    Ans. Overhead is the extra resource (usually memory or time) that are required for proper functioning 
+    of a certain task. Fragmentation is when storage space within a system is inefficiently used.
+
 7) Why is the "everything is a file" principle a good idea?  Why might it be a bad idea?
+
+    Ans. Because of that principle, we can treat everything as stream of bytes. The output from one 
+    program or process could be directed as an input to another program or process. That way, programs 
+    don't need to be specific about how they are reading or writing data. One of the reasons it might be 
+    a bad idea is when the output from one program needs to be personalized according to the receiving program.
 
 If you would like to learn more about file systems, a good next step is to learn about journaling file systems.  
 Start with [this Wikipedia article](https://en.wikipedia.org/wiki/Journaling_file_system), then 
