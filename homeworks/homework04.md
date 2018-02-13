@@ -14,15 +14,33 @@ student repository.
 1) What abstractions do file systems provide?  Give an example of something that is logically 
 true about files systems but not true of their implementations.
 
+    Ans. Looking at a file system with its abstractions, the file name and the file contents look 
+    like they are key-value pairs. The file also appears like it is a sequence of bytes. It is 
+    logically true that files are byte-based but in reality, the persistent storage is block-based.  
+
 2) What information do you imagine is stored in an `OpenFileTableEntry`?
 
+    Ans. The data structure would probably contain the contents of the file, the pointer that 
+    keeps track of how much of the file has been read, and file name, file type, the owners and 
+    members, etc.
+
 3) What are some of the ways operating systems deal with the relatively slow performance of persistent storage?
+
+    Ans. If a file needs data from the slow persistent storage, the operating system will interrupt 
+    the process until the I/O request to get data from the disk is complete and instead run other processes 
 
 4) Suppose your program writes a file and prints a message indicating that it is done writing.  
 Then a power cut crashes your computer.  After you restore power and reboot the computer, you find that the 
 file you wrote is not there.  What happened?
 
+    Ans. The file contents might have been saved in memory if it was going to occupy less than a block 
+    on the disk. Once there is at least a block worth of memory to write, the file will be saved 
+    permanently on the disk. The power cut might have happened before the OS had a chance to write 
+    that block.
+
 5) Can you think of one advantage of a File Allocation Table over a UNIX inode?  Or an advantage of a inode over a FAT?
+
+    Ans. 
 
 6) What is overhead?  What is fragmentation?
 
