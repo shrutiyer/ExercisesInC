@@ -18,6 +18,8 @@ void main(int argc, char **argv[]) {
     FILE *file_read;
     FILE *file_write[argc];
     char buffer;
+    char file_write_type;
+    int append = 0;
 
     // Check for the appropriate number of arguments
     if(argc <= 3){
@@ -25,13 +27,24 @@ void main(int argc, char **argv[]) {
         exit(0);
     }
 
+    // Checking for the command-line argument `a`
+    while ((opt = getopt(argc, argv, "a")) != -1) {
+        append = 1;
+    }
+
+    if (append) {
+        char file_write_type = "a";
+    } else {
+        char file_write_type = "w";
+    }
+
     // TODO: Check if stdin is null
 
     // Read from stdin
-    file_read = fopen(*argv[1], "r");
+    file_read = fopen(*argv[1+append], "r");
     // Create new files according to the number that user inputed
-    for (int file_count=2; file_count<argc; file_count++) {
-        file_write[file_count] = fopen(*argv[file_count], "w");
+    for (int file_count=2+append; file_count<argc; file_count++) {
+        file_write[file_count] = fopen(*argv[file_count], file_write_type);
     }
 
     // Continue reading until end of file for stdin
@@ -39,14 +52,14 @@ void main(int argc, char **argv[]) {
         buffer = fgetc(file_read);
         printf("%c", buffer);
         // Write the stdout and to all the files
-        for (int file_count=2; file_count<argc; file_count++) {
+        for (int file_count=2+append; file_count<argc; file_count++) {
             fputc(buffer, file_write[file_count]);
         }
     }
 
     // Close all files
     fclose(file_read);
-    for (int file_count=2; file_count<argc; file_count++) {
+    for (int file_count=2+append; file_count<argc; file_count++) {
         fclose(file_write[file_count]);
     }
 }
