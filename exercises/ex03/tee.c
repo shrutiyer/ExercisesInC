@@ -1,21 +1,29 @@
 /*
- *  This program is the implementation of command tee.
+ *  This program is the implementation of command `tee`.
+ *  Only includes the flag `a`.
  *  For more info, read http://man7.org/linux/man-pages/man1/tee.1.html
+
+ *  Author: Shruti Iyer (shrutiyer)
 */
 
-/*
+/*  3)
  *  I have never used or even heard about the command `tee`. So the initial
  *  hurdle was to learn how the command can be used. Once, I understood that,
  *  the problem decomposition became really easy. The overall implementation of
  *  the program required a bit of searching online and a little bit of debugging.
+ *  I did wasted a little time when I was incorrectly running the actual UNIX
+ *  command tee instead of my implementation. Next time, I would name my
+ *  implementation with a different name to avoid confusion and waste of time.
 
- * 
+ *  4)
+ *  When comparing to the professional implementation of the command, there are
+ *  a lot neater organization and setup with the use of structs and arrays.
+ *  They also have additional flags that can be used with the command `tee`.
 */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <string.h>
 
 void main(int argc, char *argv[]) {
     FILE *file_read;
