@@ -2,51 +2,65 @@
 
 ### C Exercises
 
-Modify the link below so it points to the `ex02.5` directory in your
+Modify the link below so it points to the `ex03` directory in your
 student repository.
 
-[Here is a link to the ex02.5 directory in my repository](https://github.com/shrutiyer/ExercisesInC/tree/master/exercises/ex02.5)
+[Here is a link to the ex03 directory in my repository](https://github.com/YOUR_GITHUB_USERNAME_HERE/ExercisesInC/tree/master/exercises/ex03)
 
-### Think OS Chapter 3 reading questions
+### Think OS Chapter 4 reading questions
 
-### Virtual memory
+**Files and file systems**
 
-1) The Georgian alphabet has 33 letters.  How many bit are needed to specify a letter?
+1) What abstractions do file systems provide?  Give an example of something that is logically 
+true about files systems but not true of their implementations.
 
-    Ans. Since 2^6 bits are needed to specify 64 values, 6 bits will be required to specify a letter in the Georgian alphabet. 
+    Ans. Looking at a file system with its abstractions, the file name and the file contents look 
+    like they are key-value pairs. The file also appears like it is a sequence of bytes. It is 
+    logically true that files are byte-based but in reality, the persistent storage is block-based.  
 
-2) In the UTF-16 character encoding, the binary representation of a character can take up to 32 bits.  
-Ignoring the details of the encoding scheme, how many different characters can be represented?
+2) What information do you imagine is stored in an `OpenFileTableEntry`?
 
-    Ans. Using 32 bits, a total of 2^32 values (= 4294967296) can be represented in the UTF-16 character encoding.
+    Ans. The data structure would probably contain the contents of the file, the pointer that 
+    keeps track of how much of the file has been read, and file name, file type, the owners and 
+    members, etc.
 
-3) What is the difference between "memory" and "storage" as defined in *Think OS*?
+3) What are some of the ways operating systems deal with the relatively slow performance of persistent storage?
 
-    Ans. In *Think OS*, "memory" refers to the random access memory that stores most of the data for an active process. 
-    Whereas, "storage" means the disk to which a process reads or writes files.
+    Ans. If a file needs data from the slow persistent storage, the operating system will interrupt 
+    the process until the I/O request to get data from the disk is complete and instead run other processes 
 
-4) What is the difference between a GiB and a GB?  What is the percentage difference in their sizes?
+4) Suppose your program writes a file and prints a message indicating that it is done writing.  
+Then a power cut crashes your computer.  After you restore power and reboot the computer, you find that the 
+file you wrote is not there.  What happened?
 
-    Ans. GiB is the size of the main "memory" in binary units and GB is the size of the "storage" in decimal units.
-    GiB is 2^30 bytes (or 1,073,741,824 bytes) and GB is 10^9 bytes (or 1,000,000,000 bytes). The percent difference 
-    between their sizes is 6.867% (when compared to 2^30 bytes) and 7.37% (when compared to 10^9 bytes).
-    
-    *Source:https://en.wikipedia.org/wiki/File_size*
+    Ans. The file contents might have been saved in memory if it was going to occupy less than a block 
+    on the disk. Once there is at least a block worth of memory to write, the file will be saved 
+    permanently on the disk. The power cut might have happened before the OS had a chance to write 
+    that block.
 
-5) How does the virtual memory system help isolate processes from each other?
+5) Can you think of one advantage of a File Allocation Table over a UNIX inode?  Or an advantage of a inode over a FAT?
 
-    Ans. Each process has a separate virtualized memory system that gets translated to the physical address. One process
-    cannot access the virtual address space of another process, hence isolating processes.  
+    Ans. File Allocation Table has all the file information it needs inside one table whereas UNIX inode 
+    has information distributed into many different indirection blocks. UNIX inode might be faster since 
+    contents of the files are located next to each other but the same cannot be promised of FAT system.
 
-6) Why do you think the stack and the heap are usually located at opposite ends of the address space?
-    
-    Ans. Heap and stack need to increase and decrease their size as different programs need. So, it is necessary to put them 
-    in the opposite ends so that the space in between is divided according to the program being run and to avoid any clash.
+6) What is overhead?  What is fragmentation?
 
-7) What Python data structure would you use to represent a sparse array?
+    Ans. Overhead is the extra resource (usually memory or time) that are required for proper functioning 
+    of a certain task. Fragmentation is when storage space within a system is inefficiently used.
 
-    Ans.  A `dict` where the keys contain the virtual page number and page offset in a tuple and the the value is the physical address.
+7) Why is the "everything is a file" principle a good idea?  Why might it be a bad idea?
 
-8) What is a context switch?
+    Ans. Because of that principle, we can treat everything as stream of bytes. The output from one 
+    program or process could be directed as an input to another program or process. That way, programs 
+    don't need to be specific about how they are reading or writing data. One of the reasons it might be 
+    a bad idea is when the output from one program needs to be personalized according to the receiving program.
 
-    Ans. When the OS pauses a running process and saves its state to make way to run a different process, a "context switch" occurs.
+If you would like to learn more about file systems, a good next step is to learn about journaling file systems.  
+Start with [this Wikipedia article](https://en.wikipedia.org/wiki/Journaling_file_system), then 
+[Anatomy of Linux Journaling File Systems](http://www.ibm.com/developerworks/library/l-journaling-filesystems/index.html).  
+Also consider reading [this USENIX paper](https://www.usenix.org/legacy/event/usenix05/tech/general/full_papers/prabhakaran/prabhakaran.pdf).
+
+
+
+
