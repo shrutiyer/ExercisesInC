@@ -40,7 +40,7 @@ By using an exponent bias for the signed bit, we can start using a positive numb
 
 *Source: https://en.wikipedia.org/wiki/Exponent_bias*
 
-4) Following the example in Section 5.4, write the 32-bit binary representation of -13 in single precision
+4) Following the example in Section 5.3, write the 32-bit binary representation of -13 in single precision
 IEEE floating-point.  What would you get if you accidentally interpreted this value as an integer?
 
   Signed bit: 1, Exponent: 130 or 1000 0010, Coefficient: 101 0000 0000 0000 0000 0000
