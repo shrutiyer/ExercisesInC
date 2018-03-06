@@ -15,8 +15,13 @@ void free_anything(int *p) {
 }
 
 int read_element(int *array, int index) {
-    int x = array[index];
-    return x;
+    if (index >= 0 && index <= sizeof(array)) {
+        int x = array[index];
+        return x;
+    } else {
+        perror("Index out of bounds");
+        exit(0);
+    }
 }
 
 int main()
@@ -38,7 +43,7 @@ int main()
 
     // and it catches use after free
     free(use_after_free);
-    *use_after_free = 17;
+    //*use_after_free = 17;
 
     // never_free is definitely lost
     *never_free = 17;
@@ -50,7 +55,9 @@ int main()
     free_anything(&never_allocated);
 
     free(free_twice);
-    free(free_twice);
+    // free(free_twice);
+
+    free(array2);
 
     return 0;
 }
