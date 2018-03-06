@@ -18,16 +18,14 @@ void print_local_var_address() {
 int main ()
 {
     int var2 = 5;
-    void *p1 = malloc(128);
-    void *p2 = malloc(128);
-    char *s = "Literal string";
+    void *p = malloc(128);
+    char *s = "Hello, World";
 
     printf ("Address of main is %p\n", main);
     printf ("Address of var1 is %p\n", &var1);
     printf ("Address of var2 is %p\n", &var2);
-    printf ("Address of p1 is %p\n", p1);
-    printf ("Address of p2 is %p\n", p2);
-    printf ("Address of s is %p\n", s);
+    printf ("p points to %p\n", p);
+    printf ("s points to %p\n", s);
 
     print_local_var_address();
 
