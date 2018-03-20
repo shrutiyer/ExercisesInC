@@ -5,7 +5,7 @@
 Modify the link below so it points to the `ex06` directory in your
 student repository.
 
-[Here is a link to the ex07 directory in my repository](https://github.com/YOUR_GITHUB_USERNAME_HERE/ExercisesInC/tree/master/exercises/ex07)
+[Here is a link to the ex07 directory in my repository](https://github.com/shrutiyer/ExercisesInC/tree/master/exercises/ex07)
 
 ### Think OS Chapter 7 reading questions
 
@@ -13,10 +13,19 @@ student repository.
 
 1) What happens if a program writes a new value into the program counter?
 
+    The next instruction to be executed will be changed to the address that the new program 
+    counter is pointing to.
+
 2) What is the fundamental problem caches are meant to solve?
+
+    The time it takes to fetch data from memory or load data to memory is much larger than 
+    the time it takes to perform an instruction. This creates a memory bottleneck where it 
+    the instructions take longer to execute if every instruction needs to be loaded from memory.
 
 3) If cache access time is 1 ns and memory access time is 10 ns, what is the average
 access time of a program with hit rate 50%?  How about 90%?
+
+    
 
 4) The book gives several examples of programming language features, like loops, that tend 
 to improve locality in the access pattern of instructions and/or data.  Can you think of other examples?  
