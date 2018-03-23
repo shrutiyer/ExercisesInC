@@ -52,11 +52,24 @@ Or counter-examples that might decrease locality?
 6) See if you can estimate the cost of a memory cache by comparing the prices of two similar CPUs with 
 different cache sizes.
 
+    Comparing the following two processors:
     
-
+    https://ark.intel.com/products/88184/Intel-Core-i5-6500-Processor-6M-Cache-up-to-3_60-GHz
+    
+    https://ark.intel.com/products/88196/Intel-Core-i7-6700-Processor-8M-Cache-up-to-4_00-GHz
+    
+    With 2 MB difference in cache sizes, the price difference is about $100. So, my estimate for cache cost is $50/MB.
+    
+    *Note*: It was hard to find processors that were similar in # or cores or performance frequency but different 
+    in cache sizes. My answer might not be entirely correct.
+    
 7) Why are cache policies generally more complex at the bottom of the memory hierarchy?
+
+    At the bottom of the memory hierarchy, decisions need not happen quickly. Hence, there is more time to calculate 
+    and design complex cache policies that will make the overall program faster. 
 
 8) Can you think of a strategy operating systems could use to avoid thrashing or recover when it occurs?
 
-
+    When the operating system detects that there are too many processes running with the potential of thrashing to 
+    occur, operating systems can ensure that each page gets a minimum amount of time before which they cannot be thrashed.
 
