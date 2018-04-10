@@ -18,7 +18,14 @@ License: MIT License https://opensource.org/licenses/MIT
 // errno is an external global variable that contains
 // error information
 extern int errno;
+int dummy_global;
 
+// prints addresses of the local vars, pointers, and globals
+void print_addresses(int *local, void *pointer, int *global) {
+    printf ("Address of local is %p\n", local);
+    printf ("Address of pointer is %p\n", pointer);
+    printf ("Address of global is %p\n", global);
+}
 
 // get_seconds returns the number of seconds since the
 // beginning of the day, with microsecond precision
@@ -36,6 +43,8 @@ void child_code(int i)
     printf("Hello from child %d.\n", i);
 }
 
+
+
 // main takes two parameters: argc is the number of command-line
 // arguments; argv is an array of strings containing the command
 // line arguments
@@ -45,6 +54,11 @@ int main(int argc, char *argv[])
     pid_t pid;
     double start, stop;
     int i, num_children;
+
+    // Since we are the parent process
+    int dummy_int = 2;
+    void *dummy_pointer = malloc(128);
+    print_addresses(&dummy_int, dummy_pointer, &dummy_global);
 
     // the first command-line argument is the name of the executable.
     // if there is a second, it is the number of children to create.
@@ -70,8 +84,9 @@ int main(int argc, char *argv[])
             exit(1);
         }
 
-        /* see if we're the parent or the child */
+        /* see if we're the child process*/
         if (pid == 0) {
+            print_addresses(&dummy_int, dummy_pointer, &dummy_global);
             child_code(i);
             exit(i);
         }
