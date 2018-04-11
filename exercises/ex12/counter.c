@@ -9,7 +9,7 @@ License: GNU GPLv3
 #include <stdlib.h>
 #include <pthread.h>
 
-#define NUM_CHILDREN 5000
+#define NUM_CHILDREN 2000
 
 /* Print an error message and exit.
 */
