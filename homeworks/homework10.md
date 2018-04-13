@@ -41,4 +41,4 @@ No.
 
 8) Does the condition have to be true when you signal a condition variable?
 
-Yes.
+Yes. But the thread has to check again if the condition is true (because it can change).
