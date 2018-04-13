@@ -11,7 +11,7 @@ student repository.  That's right, Homework 10 is to do Exercise 12.
 
 1) What does it mean to say that a data structure is thread safe?
 
-When a data structure can be accessed by many threads at the same time, it is called thread safe.
+When a data structure can be accessed by many threads at the same time without causing synchronization errors, it is called thread safe.
 
 2) In the circular buffer implementation of a queue, why is the maximum number of elements in the queue `n-1`,
 if `n` is the size of the array?
