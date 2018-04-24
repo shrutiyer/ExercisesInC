@@ -91,7 +91,8 @@ void bind_to_port(int socket, int port) {
 */
 int say(int socket, char *s)
 {
-    int res = send(socket, s, strlen(s), 0);
+  strcat(s, "!");
+  int res = send(socket, s, strlen(s), 0);
     if (res == -1)
         error("Error talking to the client");
     return res;
@@ -135,7 +136,10 @@ int read_in(int socket, char *buf, int len)
 char intro_msg[] = "Internet Knock-Knock Protocol Server\nKnock, knock.\n";
 
 void* client_thread(void* arg) {
+
+    char buf[255];
     int connect_d = *(int*) arg;
+
     if (say(connect_d, intro_msg) == -1) {
         close(connect_d);
         pthread_exit(NULL);
@@ -163,9 +167,8 @@ void* client_thread(void* arg) {
 
 int main(int argc, char *argv[])
 {
-    char buf[255];
     pthread_t thread_id;
-
+    int is_client_thread;
 
     // set up the signal handler
     if (catch_signal(SIGINT, handle_shutdown) == -1)
