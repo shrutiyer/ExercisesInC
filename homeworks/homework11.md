@@ -26,7 +26,7 @@ what does it mean if the value of `queue->spaces` is `3` at some point in time?
 
 It means that 3 threads can safely execute `queue_push`.
 
-5) What does it mean if `queue->space` is `-3`?
+5) What does it mean if `queue->spaces` is `-3`?
 
 It means that 3 threads are waiting to execute `queue_push`.
 
