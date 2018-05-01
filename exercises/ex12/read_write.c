@@ -24,7 +24,6 @@ concurrently with a writer who is writing.
 typedef struct {
     int counter;
     Mutex *mutex;
-    Mutex *room_empty;
     Cond *cond;
 } Shared;
 
@@ -35,7 +34,6 @@ Shared *make_shared()
     Shared *shared = check_malloc(sizeof(Shared));
     shared->counter = 0;
     shared->mutex = make_mutex();
-    shared->room_empty = make_mutex();
     shared->cond = make_cond();
     return shared;
 }
@@ -46,8 +44,6 @@ void reader_code(Shared *shared)
 {
     mutex_lock(shared->mutex);
     ++shared->counter;
-    if (shared->counter == 1)
-        mutex_lock(shared->room_empty);
     mutex_unlock(shared->mutex);
 
     printf("I am reading the thing.\n");
@@ -55,7 +51,7 @@ void reader_code(Shared *shared)
     mutex_lock(shared->mutex);
     --shared->counter;
     if (shared->counter == 0)
-        mutex_unlock(shared->room_empty);
+        cond_broadcast(shared->cond);
     mutex_unlock(shared->mutex);
 }
 
@@ -63,9 +59,11 @@ void reader_code(Shared *shared)
 */
 void writer_code(Shared *shared)
 {
-    mutex_lock(shared->room_empty);
+    mutex_lock(shared->mutex);
+    while (shared->counter > 0)
+        cond_wait(shared->cond, shared->mutex);
     printf("I am writing the thing.\n");
-    mutex_unlock(shared->room_empty);
+    mutex_unlock(shared->mutex);
 }
 
 /* Entry point for the reader threads.
